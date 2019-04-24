@@ -40,6 +40,13 @@ body{
     margin-left: 20px;
 }
 
+.menu-opcoes a:hover {
+    color: #007dc6;
+    }
+    .menu-opcoes a:active {
+    color: #867dc6;
+    }
+
 section{
     margin-top: 10px;
     display: flex;
@@ -52,6 +59,9 @@ form {
     padding: 8px;
     border-radius: 5px 5px 0 0;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 input[type="search"]{
@@ -59,6 +69,15 @@ input[type="search"]{
     border: 1px solid #acacac;
     padding-left: 8px;
     
+}
+
+button{
+    background-image: url(../img/busca.png);
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999px;
+    border: none;
 }
 
 .menu-departamentos {
@@ -79,9 +98,26 @@ input[type="search"]{
     border-bottom: 1px solid #dcdcdc ;
     padding: 4px 8px;
 }
+
+.menu-departamentos li:hover ul{
+    display: block;
+}
+
 .menu-departamentos li a{
     text-decoration: none;
     color: #333;
+}
+
+.menu-departamentos li ul{
+    display: none;
+}
+
+.menu-departamentos li ul li{
+    background-color: #dcdcdc;
+}
+
+.menu-departamentos li li a::before{
+    content: ' -';
 }
 
 .painel{
@@ -120,4 +156,40 @@ input[type="search"]{
 
 .mais-vendidos{
     background-color: #dcdcf5;
+}
+
+footer{
+    background-image: url(../img/fundo-rodape.png);
+    padding: 20px 0;
+}
+
+footer div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social{
+    display: flex;
+}
+
+.social a{
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    text-indent: -9999px;
+    margin-left: 8px;
+}
+
+a[href*="twitter.com"]{
+    background-image: url(../img/twitter.png);
+}
+
+a[href*="facebook.com"]{
+    background-image: url(../img/facebook.png);
+}
+
+a[href*="gplus.com"]{
+    background-image: url(../img/googleplus.png);
 }
