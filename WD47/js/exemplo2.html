@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<h1>JS: DOM, BOM, Document e window</h1>
+<p id="meuParagrafo">
+    Parágrafo que será modificado
+</p>
+<script>
+
+    // window = Browser Object Model (BOM)
+    // document ou window.document = Document Object Model (DOM)
+    //meuParagrafo.innerHTML = 'Texto <i>alterado</i> via JS';  ID do objeto NÃO É RECOMENDADO
+    //meuParagrafo.textContent = 'Texto alterado via JS'; ID do objeto NÃO É RECOMENDADO
+
+    //getElementById() = padrão JS (RECOMENDADO)
+    document.getElementById('meuParagrafo').textContent = 'Texto alterado via JS';
+
+    //muda o conteúdo do paragáfo depois de 3 segundos
+    function mudarConteudoParagrafo(){
+        contador++;
+        document.getElementById('meuParagrafo').textContent = 'Conteúdo alterado pela ' + contador + 'ª vez...';
+    }
+
+    //setTimeout(mudarConteudoParagrafo, 3* 1000); // executa depois de 3 segundos
+
+    let contador = 0;
+    setInterval(mudarConteudoParagrafo, 3*1000);
+
+</script>

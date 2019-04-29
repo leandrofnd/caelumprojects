@@ -1,0 +1,57 @@
+<meta charset="utf-8">
+<h1>JS: querySelector e querySelectorAll</h1>
+<style>
+    p{
+        padding: 15px 25px;
+        border-radius: 5px;
+        background: #f2f2f2;
+        border: 1px solid #DDD;
+    }
+    p.red{
+        border-color: #DB2323;
+        color: #DB2323;
+        background: #fff0f0;
+    }
+</style>
+
+<p>Paragrafo 1</p>
+<p class="red">Paragrafo 2</p>
+<p>Paragrafo 3</p>
+<p>Paragrafo 4</p>
+<p class="red">Paragrafo 5</p>
+<p>Paragrafo 6</p>
+<p class="red">Paragrafo 7</p>
+<p>Paragrafo 8</p>
+<p>Paragrafo 9</p>
+<p id="p10">Paragrafo 10</p>
+
+<script>
+
+    //querySelector(): sempre retorna um único elemento (o primeiro que ele achar)
+    const p10 = document.querySelector('#p10');
+    p10.textContent = 'Parágrafo Modificado...';
+    p10.style.fontStyle = 'italic';
+
+    //  modifica só o primeiro que ele encontra
+    //documnet.querySelector('p.red').textContent = "PARAGRAFO RED MODIFICADO...";7
+    
+    // querySelectorAll (): retorna uma lista de elementos
+    const lista = document.querySelectorAll('p.red');
+    for (let i = 0; i < lista.length; i++){
+        lista[i].textContent = "PARAGRAFO RED MODIFICADOO...";
+    }
+
+    //ForEach(): percorre arrays (ou listas de outros tipos transformadas em ARRAY)
+    lista.forEach(function( item ){
+        item.textContent = "PARAGRAFO RED MODIFICADO COM FOREACH...";
+    });
+
+    // ES6: Arrow Functions (maneira mais curta de escrever funções)
+    // +DE 1 PARAMETRO E MAIS DE UMA LINHA
+    /*lista.forEach((item) => {
+        item.textContent = "PARAGRAFO RED MODIFICADO COM ARROW FUNCTIONS...";
+    }); */
+
+    lista.forEach(item => item.textContent = "PARAGRAFO RED MODIFICADO COM ARROW FUNCTIONS...");
+
+</script>
