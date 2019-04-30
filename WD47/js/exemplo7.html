@@ -1,0 +1,139 @@
+<meta charset="utf-8">
+<h1>JS: eventBubbling, parentElement, previousElementSibling</h1>
+<table id="tabela1" class="table">
+    <thead>
+        <tr>
+            <th>Nome:</th>
+            <th>E-mail:</th>
+            <th>Cidade:</th>
+            <th>Estado:</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tiago</td>
+            <td>tiago@gmail.com</td>
+            <td>Osasco</td>
+            <td>SP</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Mateus Sila</td>
+            <td>mateus@gmail</td>
+            <td>Barueri</td>
+            <td>SP</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+        <tr>
+            <td>fabiana Gomes</td>
+            <td>fabiana@gmail.com</td>
+            <td>Recife</td>
+            <td>PE</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Laura Cardoso</td>
+            <td>laura@gmail.com</td>
+            <td>Rio de janeiro</td>
+            <td>RJ</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<style>
+    body {
+        padding: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        border-bottom: 2px solid #ddd;
+        border-right: 1px solid #ddd;
+        background: #eee;
+        text-align: left;
+        padding: 15px;
+    }
+
+    table td {
+        background: #fff;
+        border-bottom-width: 1px;
+    }
+
+    table td.editavel {
+        border-color: #FFA305;
+        color: #FFA305;
+        background: #FCF6EB;
+    }
+</style>
+
+<script>
+
+    const tabela = document.querySelector('#tabela1');
+    tabela.addEventListener('click', excluirItem);
+    tabela.addEventListener('click', editarItem);
+
+    //exclui um item da tabela
+    function excluirItem(event) {
+        //alert( event.target.tagName);
+        let isBotaoExcluir = event.target.classList.contains('excluir-item');
+        if (isBotaoExcluir == true) {
+            if (confirm('Tem certeza que deseja exluir este item?') == true) {
+                event.target.parentElement.parentElement.remove();
+            }
+        }
+
+    }
+
+    function editarItem(event) {
+        let isBotaoEditar = event.target.classList.contains('editar-item');
+        if (isBotaoEditar == true) {
+            let tdIrmao = event.target.parentElement.previousElementSibling;
+            let isConteudoEditavel = true;
+
+            if (event.target.textContent == 'Editar') {
+                event.target.textContent = 'Desabilitar edição';
+            }
+            else {
+                event.target.textContent = 'Editar';
+                isConteudoEditavel = false;
+            }
+
+            while (tdIrmao != null){
+                tdIrmao.classList.toggle('editavel');
+                tdIrmao.contentEditable = isConteudoEditavel;
+                tdIrmao = tdIrmao.previousElementSibling;
+            }
+        }
+    }
+
+</script>
