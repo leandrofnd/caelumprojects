@@ -1,0 +1,118 @@
+<meta charset="utf-8">
+<h1>JQuery: event delegation, prev, prevAll, next, nextAll, parent, closest</h1>
+<table id="tabela1" class="table">
+    <thead>
+        <tr>
+            <th>Nome:</th>
+            <th>E-mail:</th>
+            <th>Cidade:</th>
+            <th>Estado:</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tiago</td>
+            <td>tiago@gmail.com</td>
+            <td>Osasco</td>
+            <td>SP</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Mateus Sila</td>
+            <td>mateus@gmail</td>
+            <td>Barueri</td>
+            <td>SP</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+        <tr>
+            <td>fabiana Gomes</td>
+            <td>fabiana@gmail.com</td>
+            <td>Recife</td>
+            <td>PE</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Laura Cardoso</td>
+            <td>laura@gmail.com</td>
+            <td>Rio de janeiro</td>
+            <td>RJ</td>
+            <td>
+                <button class="editar-item">Editar</button>
+            </td>
+            <td>
+                <button class="excluir-item">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<style>
+    body {
+        padding: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        border-bottom: 2px solid #ddd;
+        border-right: 1px solid #ddd;
+        background: #eee;
+        text-align: left;
+        padding: 15px;
+    }
+
+    table td {
+        background: #fff;
+        border-bottom-width: 1px;
+    }
+
+    table td.editavel {
+        border-color: #FFA305;
+        color: #FFA305;
+        background: #FCF6EB;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    $('#tabela1').on('click', 'button.excluir-item', function(){
+        if (confirm('Tem certeza que deseja excluir este item?')){
+            $(this).closest('tr').remove();
+        }
+    })
+
+    //this é o button pois está monitorado
+    $('#tabela1').on('click', 'button.editar-item', function(){
+        if ( $(this).text() === 'Editar'){
+            $(this).text('Salvar');
+            $(this).parent().prevAll('td').addClass('editavel').prop('contenteditable', true);
+        }
+        else{
+            $(this).text('Editar');
+            $(this).parent().prevAll('td').removeClass('editavel').prop('contenteditable', false);
+        }
+    })
+</script>

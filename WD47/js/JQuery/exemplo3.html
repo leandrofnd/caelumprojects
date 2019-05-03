@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<h1>JQuery: append, appendTo, prepend, prependTo,insertBefore, insertAfter, after, before</h1>
+<style>
+    form{
+        width: 400px;
+        margin-top: 20px;
+    }
+    body{
+        padding: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    input[type=text]{
+        width: 100%;
+        border: 1px solid #CCC;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+    button{
+        border-radius: 5px;
+        border: none;
+        background: green;
+        color: #fff;
+        padding: 15px 35px;
+    }
+    .field{
+        margin-bottom: 10px;
+    }
+    .msg{
+        padding: 15px 25px;
+        border-radius: 5px;
+        background: #f2f2f2;
+        border: 1px solid #ddd;
+    }
+    .msg-error, .destacar{
+        border-color:#DB2323 !important;
+        color: #DB2323;
+        background: #fff0f0;
+    }
+    .msg-success{
+        border-color: #30CF6C;
+        color: #30CF6C;
+        background: #E3FFEE;
+    }
+</style>
+<form action="" id="form1">
+    <div class="field">
+        <label for="">
+            * Nome: <br>
+            <input type="text" class="required" data-mensagem="Por favor, preencha o nome!">
+        </label>
+    </div>
+    <div class="field">
+        <label for="">
+            * E-mail: <br>
+            <input type="text" class="required" data-mensagem="Por favor, preencha o E-MAIL!">
+        </label>
+    </div>
+    <div class="field">
+        <label for="">
+            Telefone: <br>
+            <input type="text" />
+        </label>
+    </div>
+    <div class="field">
+        <button type="submit">
+            Cadastrar
+        </button>
+    </div>
+        
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    //guardamos a referência do formulario
+    const form = $('#form1');
+    const divMsg = $('<div class="msg msg-error"></div>');
+
+    // on(): equivale ao addEventListener()
+    form.on('submit', function(event){
+        event.preventDefault();
+        const camposObrigatorios = $('.required', this);
+        //console.log(this); p/ descobrir quem é o this - pode subs por form
+        let isFormValido = true;
+        const mensagensErro = [];
+
+        camposObrigatorios.each(function(indice,campo){
+            let isVazio = $(campo).val().trim().length === 0;
+            if (isVazio === true){
+                $(campo).addClass('destacar');
+                isFormValido = false;
+                mensagensErro.push($(campo).data('mensagem'));
+            }
+            else{
+                $(campo).removeClass('destacar');
+            }
+        }); // fim do comando each()
+
+        if(isFormValido === false){
+            divMsg.removeClass('msg-success').addClass('msg-error');
+            divMsg.html(`
+                Por favor, preencha os campos sinalizados!<br>
+                ${ mensagensErro.join("<br>")}
+            `);   
+        }
+        else{
+            divMsg.removeClass('msg-error').addClass('msg-success');
+            divMsg.html(`
+                Cadastro realizado com <b>SUCESSO</b>!
+            `);
+        }
+
+        form.prepend(divMsg); // prepend(): adiciona o divmsg como primeiro filho de form
+        //divMsg.prependTo(form); mesma coisa mas com sintaxe diferente
+        //form.append(divMsg); // adiciona o divMsg como ultimo filho do form
+        //divMsg.appendTo(form);// equivale ao de cima
+        //form.before(divMsg);// adiciona divMsg antes do form
+        //divMsg.insertBefore(form); ^^
+        
+    });
+
+</script>
